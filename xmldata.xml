@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Expert>
+        <Id>0</Id>
+        <Name>Jeppe Joppeson</Name>
+        <Description>Coolgrabb</Description>
+        <Email>asd</Email>
+        <Recomend>
+            <Text>Han är bättre än mig</Text>
+            <Recomended>1</Recomended>
+        </Recomend>
+    </Expert>
+    
+    <Expert>
+        <Id>1</Id>
+        <Name>Dman</Name>
+        <Description>Better player than Zlatan</Description>
+        <Email>asd</Email>
+        <Recomend>
+            <Text>Han en tönt</Text>
+            <Recomended>0</Recomended>
+        </Recomend>
+    </Expert>
+    
+    <Topic>
+        <Id>0</Id>
+        <Name>Nörd</Name>
+        <Description>123</Description>
+        <Originator>0</Originator>
+        <Subtopic></Subtopic>
+    </Topic>
+    
+    
+    <Topic>
+        <Id>1</Id>
+        <Name>Datanörd</Name>
+        <Description>asd</Description>
+        <Originator>1</Originator>
+        <Subtopic>1</Subtopic>
+    </Topic>
+      
+</root>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="root">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Expert" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Id"/>
+                            <xs:element name="Name"/>
+                            <xs:element name="Description"/>
+                            <xs:element name="Email"/>
+                            <xs:sequence>
+                                <xs:element name="Recomend">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="Text"/>
+                                            <xs:element name="Recomended"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:sequence>
+                    </xs:complexType>
+                    
+                    <xs:key name="ExpertID">
+                        <xs:selector xpath="./Expert"/>
+                        <xs:field xpath="Id"/>
+                    </xs:key>
+                </xs:element>
+                
+                <xs:element name="Topic" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Id"/>
+                            <xs:element name="Name"/>
+                            <xs:element name="Description"/>
+                            <xs:element name="Originator"/>                
+                            <xs:sequence>
+                                <xs:element name="Subtopic"/>
+                            </xs:sequence>
+                        </xs:sequence>
+                    </xs:complexType>
+                    
+                    <xs:key name="TopicID">
+                        <xs:selector xpath="./TopicId"/>
+                        <xs:field xpath="Id"/>
+                    </xs:key>                                        
+                    
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:keyref name="Originator" refer="ExpertID">
+            <xs:selector xpath="./root/Topic"/>
+            <xs:field xpath="Id"/>
+        </xs:keyref>
+        
+    </xs:element>    
+</xs:schema>
