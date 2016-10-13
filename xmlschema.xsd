@@ -3,57 +3,104 @@
     <xs:element name="root">
         <xs:complexType>
             <xs:sequence>
+                
+                
                 <xs:element name="Expert" maxOccurs="unbounded">
-                    <xs:complexType>
+                    <xs:complexType>                                                    
                         <xs:sequence>
-                            <xs:element name="Id"/>
+                            <xs:element name="Id">
+                                <xs:complexType>                                    
+                                    <xs:attribute name="id" type="xs:ID" use="required"></xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="Name"/>
                             <xs:element name="Description"/>
                             <xs:element name="Email"/>
                             <xs:sequence>
-                                <xs:element name="Recomend">
+                                <xs:element name="ExpertArea" maxOccurs="unbounded">
+                                    <xs:complexType>                                    
+                                        <xs:attribute name="idref" type="xs:IDREF" use="required"></xs:attribute>
+                                    </xs:complexType>    
+                                </xs:element>
+                            </xs:sequence>
+                            <xs:sequence>
+                                <xs:element name="Recomend" minOccurs="0" maxOccurs="unbounded">
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element name="Text"/>
-                                            <xs:element name="Recomended"/>
+                                            <xs:element name="Recomended">
+                                                <xs:complexType>                                    
+                                                    <xs:attribute name="idref" type="xs:IDREF" use="required"></xs:attribute>
+                                                </xs:complexType>            
+                                            </xs:element>
                                         </xs:sequence>
                                     </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:sequence>                       
+                    </xs:complexType>
+                    
+                    <xs:key name="ExpertID">
+                        <xs:selector xpath="./Expert/Id"/>
+                        <xs:field xpath="@id"/>
+                    </xs:key>
+                    
+                </xs:element>        
+                
+                
+                
+                <xs:element name="Topic" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>                            
+                            <xs:element name="Id">
+                                <xs:complexType>                                    
+                                    <xs:attribute name="id" type="xs:ID" use="required"></xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Name"/>
+                            <xs:element name="Description"/>
+                            <xs:element name="Originator">
+                                <xs:complexType>                                    
+                                    <xs:attribute name="idref" type="xs:IDREF" use="required"></xs:attribute>
+                                </xs:complexType>
+                            </xs:element>                
+                            <xs:sequence>
+                                <xs:element name="Subtopic" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>                                    
+                                        <xs:attribute name="idref" use="required"></xs:attribute>
+                                    </xs:complexType>    
                                 </xs:element>
                             </xs:sequence>
                         </xs:sequence>
                     </xs:complexType>
                     
-                    <xs:key name="ExpertID">
-                        <xs:selector xpath="./Expert"/>
-                        <xs:field xpath="Id"/>
-                    </xs:key>
-                </xs:element>
-                
-                <xs:element name="Topic" maxOccurs="unbounded">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Id"/>
-                            <xs:element name="Name"/>
-                            <xs:element name="Description"/>
-                            <xs:element name="Originator"/>                
-                            <xs:sequence>
-                                <xs:element name="Subtopic"/>
-                            </xs:sequence>
-                        </xs:sequence>
-                    </xs:complexType>
-                    
                     <xs:key name="TopicID">
-                        <xs:selector xpath="./TopicId"/>
-                        <xs:field xpath="Id"/>
-                    </xs:key>                                        
+                        <xs:selector xpath="./Topic/Id"/>
+                        <xs:field xpath="@id"/>
+                    </xs:key>               
                     
                 </xs:element>
             </xs:sequence>
         </xs:complexType>
         
         <xs:keyref name="Originator" refer="ExpertID">
-            <xs:selector xpath="./root/Topic"/>
-            <xs:field xpath="Id"/>
+            <xs:selector xpath="./root/Topic/Originator"/>
+            <xs:field xpath="@idref"/>
+        </xs:keyref>
+        
+        <xs:keyref name="Subtopic" refer="TopicID">
+            <xs:selector xpath="./root/Topic/Subtopic"/>
+            <xs:field xpath="@idref"/>
+        </xs:keyref>
+        
+        <xs:keyref name="ExpertArea" refer="TopicID">
+            <xs:selector xpath="./root/Expert/ExpertArea"/>
+            <xs:field xpath="@idref"/>
+        </xs:keyref>
+        
+        <xs:keyref name="Recomends" refer="ExpertID">
+            <xs:selector xpath="./root/Expert/Recomend/Recomended"/>
+            <xs:field xpath="@idref"/>
         </xs:keyref>
         
     </xs:element>    
