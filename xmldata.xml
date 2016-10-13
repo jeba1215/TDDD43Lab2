@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="xml_schema_lab1_vicda164_jesba289.xsd">
     <Expert>
-        <Id>0</Id>
+        <Id id="ea" />
         <Name>Jeppe Joppeson</Name>
         <Description>Coolgrabb</Description>
         <Email>asd</Email>
+        <ExpertArea idref="ta"/>        
         <Recomend>
             <Text>Han är bättre än mig</Text>
-            <Recomended>1</Recomended>
+            <Recomended idref="eb" />
         </Recomend>
-    </Expert>
-    
+    </Expert>    
+
     <Expert>
-        <Id>1</Id>
+        <Id id="eb"/>
         <Name>Dman</Name>
         <Description>Better player than Zlatan</Description>
-        <Email>asd</Email>
+        <Email>asd</Email>        
+        <ExpertArea idref="ta"/>
+        <ExpertArea idref="tb"/>
         <Recomend>
             <Text>Han en tönt</Text>
-            <Recomended>0</Recomended>
+            <Recomended idref="ea" />
         </Recomend>
     </Expert>
     
-    <Topic>
-        <Id>0</Id>
+    <Topic>        
+        <Id id="ta"/>
         <Name>Nörd</Name>
         <Description>123</Description>
-        <Originator>0</Originator>
-        <Subtopic></Subtopic>
+        <Originator idref="ea" />
     </Topic>
     
     
-    <Topic>
-        <Id>1</Id>
+    <Topic>        
+        <Id id="tb"/>
         <Name>Datanörd</Name>
         <Description>asd</Description>
-        <Originator>1</Originator>
-        <Subtopic>1</Subtopic>
+        <Originator idref="ea"/>
+        <Subtopic idref="ta"/>
     </Topic>
       
 </root>
